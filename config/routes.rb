@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :case_logs do
     Form.new(2021, 2022).all_pages.keys.map do |page|
       get page.to_s, to: "case_logs##{page}"
+      post page.to_s, to: "case_logs#check_answers_household_characteristics" if (page.to_s == "household_number_of_other_members")
       post page.to_s, to: "case_logs#next_page"
+      
     end
   end
 end
