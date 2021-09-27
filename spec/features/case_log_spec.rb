@@ -98,13 +98,20 @@ RSpec.describe "Test Features" do
     end
   end
 
-  describe "check answers page", :type => :controller do 
+  describe "check answers page" do
+    let(:subsection) { "household_characteristics" }
+
     context "only one questions remains to be answered for the household characteristics section" do
-      it "redirects to the check answers page when answering the last question and clicking save and continue" do
-        visit("/case_logs/#{check_answers_case_log.id}/household_number_of_other_members")
-        fill_in("household_number_of_other_members", with: 0)
-        click_button("Save and continue")
-        expect(page).to have_current_path("/case_logs/#{check_answers_case_log.id}/check-answers")
+      # it "redirects to the check answers page when answering the last question and clicking save and continue" do
+      #   visit("/case_logs/#{check_answers_case_log.id}/household_number_of_other_members")
+      #   fill_in("household_number_of_other_members", with: 0)
+      #   click_button("Save and continue")
+      #   expect(page).to have_current_path("/case_logs/#{check_answers_case_log.id}/check-answers")
+      # end
+
+      it "can be visited by URL" do
+        visit("case_logs/#{case_log.id}/#{subsection}/check_answers")
+        expect(page).to have_content("Check the answers you gave for #{subsection.tr('_', ' ')}")
       end
     end
   end

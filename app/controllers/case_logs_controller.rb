@@ -35,9 +35,9 @@ class CaseLogsController < ApplicationController
     params.permit(questions_for_page)
   end
 
-  def check_answers_household_characteristics
+  def check_answers
     @case_log = CaseLog.find(params[:case_log_id])
-    render "form/check_answers_household_characteristics", locals: { case_log_id: @case_log.id }
+    render "form/check_answers", locals: { case_log_id: @case_log.id }
   end
 
   form = Form.new(2021, 2022)
